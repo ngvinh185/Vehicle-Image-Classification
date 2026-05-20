@@ -14,7 +14,7 @@ optimizer = optim.AdamW([
   {"params": model.head.parameters(), "lr": head_lr},
 ])
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-    optimizer, T_max=70
+    optimizer, T_max=35
 )
 train_lossi = []
 dev_lossi = []

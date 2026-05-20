@@ -8,12 +8,18 @@ class Model(nn.Module):
     self.backbone = efficientnet_b3(weights=EfficientNet_B3_Weights.IMAGENET1K_V1).features
     self.head = nn.ModuleDict(dict(
       custom_conv = nn.Sequential(
-        nn.Conv2d(in_channels=1536, out_channels=2048, kernel_size=7, stride=2, padding=1),
+        nn.Conv2d(in_channels=1536, out_channels=2048, kernel_size=3, stride=1, padding=1),
         nn.BatchNorm2d(2048),
-        nn.ReLU()
+        nn.ReLU(),
+        
+        nn.Conv2d(in_channels=2048, out_channels=2048, kernel_size=5, stride=1, padding=1),
+        nn.BatchNorm2d(2048),
+        nn.ReLU(),
+        
+        nn.AdaptiveAvgPool2d(1)
       ), 
       fc = nn.Sequential(
-        nn.Linear(2048 * 2 * 2, 512),
+        nn.Linear(2048, 512),
         nn.BatchNorm1d(512),
         nn.ReLU(),
         nn.Dropout(0.5), 
