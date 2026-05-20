@@ -1,0 +1,11 @@
+img_size = 224
+folder_data_train = 'dataset/train'
+folder_data_val = 'dataset/val'
+num_class = 7
+device = 'cuda:2'
+base_epoch = 0
+start_epoch = 0
+max_epoch = 70
+backbone_lr = 1e-5
+head_lr = 1e-3
+batch_size = 16
