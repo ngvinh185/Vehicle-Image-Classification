@@ -11,18 +11,23 @@ Sử dụng **EfficientNet-B3** pretrained trên ImageNet làm backbone, finetun
 ```
 Vehicle-Image-Classification/
 │
-├── Img/                        # Dữ liệu gốc (tải về từ Kaggle)
-│   ├── Auto Rickshaws/
-│   ├── Bikes/
-│   ├── Cars/
-│   ├── Motorcycles/
-│   ├── Planes/
-│   ├── Ships/
-│   └── Trains/
-│
-├── dataset/                    # Dữ liệu sau khi split (tự động tạo)
+├── dataset/
 │   ├── train/
+│   │   ├── Auto Rickshaws/
+│   │   ├── Bikes/
+│   │   ├── Cars/
+│   │   ├── Motorcycles/
+│   │   ├── Planes/
+│   │   ├── Ships/
+│   │   └── Trains/
 │   └── val/
+│       ├── Auto Rickshaws/
+│       ├── Bikes/
+│       ├── Cars/
+│       ├── Motorcycles/
+│       ├── Planes/
+│       ├── Ships/
+│       └── Trains/
 │
 ├── logs/                       # Log training (tự động tạo)
 │   └── training.log
@@ -74,21 +79,7 @@ pip install torch torchvision matplotlib
 
 ## Chạy
 
-**Bước 1:** Tải dataset từ Kaggle về thư mục `Img/`
-
-```bash
-# Cấu trúc mong đợi:
-# Img/Cars/img1.jpg
-# Img/Bikes/img2.png ...
-```
-
-**Bước 2:** Chia train/val
-
-```bash
-python test.py
-```
-
-**Bước 3:** Cấu hình (tuỳ chỉnh nếu cần)
+**Bước 1:** Cấu hình (tuỳ chỉnh nếu cần)
 
 ```python
 # config.py
@@ -97,7 +88,7 @@ max_epoch = 70
 batch_size = 16
 ```
 
-**Bước 4:** Train
+**Bước 2:** Train
 
 ```bash
 python index.py
