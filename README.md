@@ -54,7 +54,7 @@ Vehicle-Image-Classification/
 
 **`model.py`** — Định nghĩa class `Model` gồm:
 - **Backbone**: `efficientnet_b3.features` (pretrained ImageNet, giữ output 4D)
-- **Head**: `ModuleDict` gồm `custom_conv` (Conv2d → BN → ReLU) và `fc` (Linear → BN → ReLU → Dropout → Linear)
+- **Head**: `ModuleDict` gồm `custom_conv` (Conv2d → BN → ReLU) và `fc` (Linear → BN → ReLU → Dropout → Linear → GlobalPooling)
 
 **`utils.py`** — Hàm `get_logger()` tạo logger ghi log ra file `logs/training.log` và stdout.
 
