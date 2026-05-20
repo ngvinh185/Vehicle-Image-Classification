@@ -46,23 +46,30 @@ Vehicle-Image-Classification/
 
 ## Mô tả từng file
 
-**`config.py`** — Chứa toàn bộ hyperparameter: image size (224), đường dẫn dataset, số class (7), device, learning rate của backbone (`1e-5`) và head (`1e-3`), batch size (16), số epoch tối đa (70).
+**`config.py`**
+— Chứa toàn bộ hyperparameter: image size (224), đường dẫn dataset, số class (7), device, learning rate của backbone (`1e-5`) và head (`1e-3`), batch size (16), số epoch tối đa (70).
 
-**`test.py`** — Script tiền xử lý dữ liệu: đọc ảnh từ thư mục `Img/`, shuffle và chia 80/20 thành train/val, copy vào thư mục `dataset/` theo cấu trúc `ImageFolder`.
+**`test.py`** 
+— Script tiền xử lý dữ liệu: đọc ảnh từ thư mục `Img/`, shuffle và chia 80/20 thành train/val, copy vào thư mục `dataset/` theo cấu trúc `ImageFolder`.
 
-**`dataset.py`** — Định nghĩa transform cho train (resize, flip, color jitter, normalize) và val (resize, normalize). Khởi tạo `ImageFolder` và `DataLoader` cho cả hai tập.
+**`dataset.py`** 
+— Định nghĩa transform cho train (resize, flip, color jitter, normalize) và val (resize, normalize). Khởi tạo `ImageFolder` và `DataLoader` cho cả hai tập.
 
 **`model.py`** — Định nghĩa class `Model` gồm:
 - **Backbone**: `efficientnet_b3.features` (pretrained ImageNet, giữ output 4D)
 - **Head**: `ModuleDict` gồm `custom_conv` (Conv2d → BN → ReLU) và `fc` (Linear → BN → ReLU → Dropout → Linear → GlobalPooling)
 
-**`utils.py`** — Hàm `get_logger()` tạo logger ghi log ra file `logs/training.log` và stdout.
+**`utils.py`**
+— Hàm `get_logger()` tạo logger ghi log ra file `logs/training.log` và stdout.
 
-**`train.py`** — Training loop chính: khởi tạo model, loss (CrossEntropy), optimizer (AdamW với differential lr), scheduler (CosineAnnealingLR). Mỗi epoch tính train/val loss và accuracy, log kết quả và lưu checkpoint.
+**`train.py`** 
+— Training loop chính: khởi tạo model, loss (CrossEntropy), optimizer (AdamW với differential lr, lr head > lr backbone), scheduler (CosineAnnealingLR). Mỗi epoch tính train/val loss và accuracy, log kết quả và lưu checkpoint.
 
-**`evaluate.py`** — Hàm `plot_training_progress()` vẽ 2 biểu đồ Loss và Accuracy theo epoch (train vs val), lưu ra file `training_progress_separate.png`.
+**`evaluate.py`** 
+— Hàm `plot_training_progress()` vẽ 2 biểu đồ Loss và Accuracy theo epoch (train vs val), lưu ra file `training_progress_separate.png`.
 
-**`index.py`** — Entry point, import và chạy toàn bộ pipeline (train + evaluate).
+**`index.py`** 
+— Entry point, import và chạy toàn bộ pipeline (train + evaluate).
 
 ---
 
